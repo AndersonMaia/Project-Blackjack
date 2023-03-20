@@ -10,7 +10,8 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Fira Sans", sans-serif;
+  letter-spacing: 0.3rem;
 }
 
 body {
@@ -51,6 +52,7 @@ header {
   font-size: 48px;
   opacity: 80%;
   transition: 0.4s;
+  cursor: pointer;
 }
 
 .dice-roll button:hover {
@@ -133,9 +135,10 @@ main {
   font-weight: 700;
   min-height: 15vh;
   padding: 1rem;
+  cursor: pointer;
 }
 
-.card:hover {
+.hover-fx:hover {
   background-color: var(--dark);
   transform: 0.4s;
   -o-transform: translateY(-15px);
@@ -145,8 +148,8 @@ main {
   transform: translateY(-15px);
 }
 
-.card:active {
-  background-color: var(--accent);
+.hover-fx:active {
+  background-color: #29267e;
   -o-transform: translateY(15px);
   -ms-transform: translateY(15px);
   -moz-transform: translateY(15px);
@@ -155,7 +158,17 @@ main {
 }
 
 .card-flipped {
-  background-color: var(--accent);
+  background-color: #29267e;
+}
+
+.player-win {
+  background: forestgreen;
+  color: whitesmoke;
+}
+
+.player-lose {
+  background: var(--accent);
+  color: whitesmoke;
 }
 
 /*Sizing for different screens*/
