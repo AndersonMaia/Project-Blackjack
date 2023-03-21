@@ -1,4 +1,5 @@
 const shuffleBtn = document.querySelector(".dice");
+const resetBtn = document.querySelector(".reload");
 const player1Score = document.querySelector(".player1-score");
 const player2Score = document.querySelector(".player2-score");
 const player1Points = document.querySelector(".p1-points");
@@ -6,16 +7,16 @@ const player2Points = document.querySelector(".p2-points");
 const p1Cards = document.querySelectorAll(".p1-card");
 const p2Cards = document.querySelectorAll(".p2-card");
 
-let p1Card1Value;
-let p1Card2Value;
-let p1Card3Value;
-let p1Card4Value;
-let p1Card5Value;
-let p2Card1Value;
-let p2Card2Value;
-let p2Card3Value;
-let p2Card4Value;
-let p2Card5Value;
+let p1Card1Value = 0;
+let p1Card2Value = 0;
+let p1Card3Value = 0;
+let p1Card4Value = 0;
+let p1Card5Value = 0;
+let p2Card1Value = 0;
+let p2Card2Value = 0;
+let p2Card3Value = 0;
+let p2Card4Value = 0;
+let p2Card5Value = 0;
 
 let p1TotalPoints = 0;
 let p2TotalPoints = 0;
@@ -23,7 +24,9 @@ let p2TotalPoints = 0;
 let p1CardsTurnedCount = 0;
 let p2CardsTurnedCount = 0;
 
-shuffleBtn.addEventListener("click", shuffleCards);
+shuffleCards();
+
+shuffleBtn.addEventListener("click", reset);
 
 function flipCard() {
   for (let card of p1Cards) {
@@ -97,18 +100,16 @@ function flipCard() {
 }
 
 function shuffleCards() {
-  reset();
-
-  p1Card1Value = Math.floor(Math.random() * 10);
-  p1Card2Value = Math.floor(Math.random() * 10);
-  p1Card3Value = Math.floor(Math.random() * 10);
-  p1Card4Value = Math.floor(Math.random() * 10);
-  p1Card5Value = Math.floor(Math.random() * 10);
-  p2Card1Value = Math.floor(Math.random() * 10);
-  p2Card2Value = Math.floor(Math.random() * 10);
-  p2Card3Value = Math.floor(Math.random() * 10);
-  p2Card4Value = Math.floor(Math.random() * 10);
-  p2Card5Value = Math.floor(Math.random() * 10);
+  p1Card1Value = Math.trunc(Math.random() * 10);
+  p1Card2Value = Math.trunc(Math.random() * 10);
+  p1Card3Value = Math.trunc(Math.random() * 10);
+  p1Card4Value = Math.trunc(Math.random() * 10);
+  p1Card5Value = Math.trunc(Math.random() * 10);
+  p2Card1Value = Math.trunc(Math.random() * 10);
+  p2Card2Value = Math.trunc(Math.random() * 10);
+  p2Card3Value = Math.trunc(Math.random() * 10);
+  p2Card4Value = Math.trunc(Math.random() * 10);
+  p2Card5Value = Math.trunc(Math.random() * 10);
 
   flipCard();
 }
@@ -117,15 +118,19 @@ function checkResult() {
   if (p1TotalPoints === 21 && p2TotalPoints !== 21) {
     player1Score.classList.add("player-win");
     player2Score.classList.add("player-lose");
+    lockCards();
   } else if (p2TotalPoints === 21 && p1TotalPoints !== 21) {
     player1Score.classList.add("player-lose");
     player2Score.classList.add("player-win");
+    lockCards();
   } else if (p1TotalPoints > 21 && p2TotalPoints !== 21) {
     player1Score.classList.add("player-lose");
     player2Score.classList.add("player-win");
+    lockCards();
   } else if (p1TotalPoints !== 21 && p2TotalPoints > 21) {
     player1Score.classList.add("player-win");
     player2Score.classList.add("player-lose");
+    lockCards();
   } else if (
     p1TotalPoints !== 21 &&
     p2TotalPoints !== 21 &&
@@ -135,47 +140,24 @@ function checkResult() {
     if (p1TotalPoints % 21 < p2TotalPoints % 21) {
       player1Score.classList.add("player-win");
       player2Score.classList.add("player-lose");
+      lockCards();
     } else if (p2TotalPoints % 21 < p1TotalPoints % 21) {
       player1Score.classList.add("player-lose");
       player2Score.classList.add("player-win");
+      lockCards();
     }
   }
 }
 
-function reset() {
-  p1Card1Value = 0;
-  p1Card2Value = 0;
-  p1Card3Value = 0;
-  p1Card4Value = 0;
-  p1Card5Value = 0;
-  p2Card1Value = 0;
-  p2Card2Value = 0;
-  p2Card3Value = 0;
-  p2Card4Value = 0;
-  p2Card5Value = 0;
-
-  p1TotalPoints = 0;
-  player1Points.innerText = 0;
-  p1CardsTurnedCount = 0;
-  player1Score.classList.remove("player-lose");
-  player1Score.classList.remove("player-win");
-
-  p2TotalPoints = 0;
-  player2Points.innerText = 0;
-  p2CardsTurnedCount = 0;
-  player2Score.classList.remove("player-lose");
-  player2Score.classList.remove("player-win");
-
+function lockCards() {
   for (let card of p1Cards) {
     card.disabled = true;
-    card.classList.remove("card-flipped");
-    card.classList.add("hover-fx");
-    card.innerText = " ";
   }
   for (let card of p2Cards) {
     card.disabled = true;
-    card.classList.remove("card-flipped");
-    card.classList.add("hover-fx");
-    card.innerText = " ";
   }
+}
+
+function reset() {
+  location.reload();
 }

@@ -28,12 +28,12 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--dark);
+  background-color: var(--gray);
   padding: 1rem;
   width: 100%;
   min-height: 20vh;
   gap: 70rem;
-  color: var(--light);
+  color: var(--darker);
   text-transform: uppercase;
 }
 
@@ -49,10 +49,15 @@ header {
 
 .dice-roll button {
   border: none;
-  font-size: 48px;
+  background: none;
+  font-size: 64px;
   opacity: 80%;
   transition: 0.4s;
   cursor: pointer;
+}
+
+.reload:hover {
+  margin-left: 1rem;
 }
 
 .dice-roll button:hover {
